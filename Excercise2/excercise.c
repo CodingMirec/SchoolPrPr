@@ -42,7 +42,7 @@ int main()
     // printf("objem: %.3lf\n \n", x * y * z);
 
     int a, b, c, d, e;
-    printf("Zadaj prvych 5 cisiel: ");KO
+    printf("Zadaj prvych 5 cisiel: ");
     scanf("%d %d %d %d %d", &a, &b, &c, &d, &e);
     printf("%d\n", e / --a * b++ / c++);
     printf("Zadaj druhych 5 cisiel: ");
