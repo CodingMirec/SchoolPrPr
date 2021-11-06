@@ -48,11 +48,34 @@ void main()
     scanf("%c", &input);
 
     printf("Napisane : %c \n", input);
-    if (input == 'v')
+    switch (input)
     {
+    case 'v':
         functionV(&zoznam);
-        return NULL;
+        break;
+    case 'o':
+        functionO(&zoznam);
+        break;
+    case 'n':
+        functionN(&zoznam);
+        break;
+    case 's':
+        functionS(&zoznam);
+        break;
+    case 'h':
+        functionH(&zoznam);
+        break;
+    case 'p':
+        functionP(&zoznam);
+        break;
+    case 'z':
+        functionZ(&zoznam);
+        break;
+    case 'k':
+        functionK(&zoznam);
+        break;
+    default:
+        printf("Zly vstup");
+        break;
     }
-
-    printf("Zly vstup \n");
 }
