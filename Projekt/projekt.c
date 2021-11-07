@@ -1,68 +1,62 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void functionV(FILE **zoznam);
-
 int rodneIsValid(char *str)
 {
     unsigned long long value = strtoull(str, NULL, 10);
     return value >= 1000000000 && value % 11 == 0;
 }
 
-void functionV(FILE **zoznam)
+void functionV(FILE *zoznam)
 {
-    char slovo, array;
-    int i, num;
+    char buf[200];
+    char data;
+    int riadky, zaznamy, i;
+    char **poleVstupov;
 
-    *zoznam = fopen("konferencny_zoznam.txt", "r");
-    if (*zoznam == NULL)
+    zoznam = fopen("konferencny_zoznam.txt", "r");
+    if (zoznam == NULL)
     {
         printf("Neotvoreny subor \n");
         exit(1);
     }
-    printf("otvorene");
-
-    slovo = getc(*zoznam);
-    ungetc(slovo, *zoznam);
-    for (i = 1; i != EOF; i++)
-    {
-        while (fgets(array, 200, *zoznam) != NULL)
+    for (i = 0; i != 9; i++)
+        while (fgets(buf, 200, zoznam) != NULL)
         {
+            if (i > 8)
+                i = 0;
+            i++;
             switch (i)
             {
-            case '1':
-                printf("Prezenter: %s", array);
+            case 1:
+                printf("Prezenter: %s", buf);
                 break;
-            case '2':
-                printf("Rodne cislo: %s", array);
+            case 2:
+                printf("Rodne cislo: %s", buf);
                 break;
-            case '3':
-                printf("Kod prezentacnej miestnosti: %s", array);
+            case 3:
+                printf("Kod prezentacnej miestnosti: %s", buf);
                 break;
-            case '4':
-                printf("Nazov prispevku: %s", array);
+            case 4:
+                printf("Nazov prispevku: %s", buf);
                 break;
-            case '5':
-                printf("Mena autorov: %s", array);
+            case 5:
+                printf("Mena autorov: %s", buf);
                 break;
-            case '6':
-                printf("Typ prezentovania: %s", array);
+            case 6:
+                printf("Typ prezentovania: %s", buf);
                 break;
-            case '7':
-                printf("Cas prezentovania: %s", array);
+            case 7:
+                printf("Cas prezentovania: %s", buf);
                 break;
-            case '8':
-                printf("Datum: %s", array);
+            case 8:
+                printf("Datum: %s", buf);
                 break;
-
             default:
-                printf("something went wrong");
+                printf(" \n");
                 break;
             }
         }
-    }
-
-    exit(1);
 }
 
 void functionO(FILE **zoznam)
@@ -95,41 +89,50 @@ void functionK(FILE **zoznam)
 
 void main()
 {
-    FILE *zoznam;
+    FILE *zoznam = NULL;
     char input;
-    char result;
-    printf("Napis znak: \n");
-    scanf("%c", &input);
+    char **poleZnakov = NULL;
+    char buf[50];
 
-    printf("Napisane : %c \n", input);
-    switch (input)
+    while (1)
     {
-    case 'v':
-        functionV(&zoznam);
-        break;
-    case 'o':
-        functionO(&zoznam);
-        break;
-    case 'n':
-        functionN(&zoznam);
-        break;
-    case 's':
-        functionS(&zoznam);
-        break;
-    case 'h':
-        functionH(&zoznam);
-        break;
-    case 'p':
-        functionP(&zoznam);
-        break;
-    case 'z':
-        functionZ(&zoznam);
-        break;
-    case 'k':
-        functionK(&zoznam);
-        break;
-    default:
-        printf("Zly vstup");
-        break;
+
+        printf("Napis znak: \n");
+        scanf(" %c", &input);
+        printf("Napisane : %c \n", input);
+
+        switch (input)
+        {
+        case 'v':
+            functionV(&*zoznam);
+            break;
+        case 'o':
+            functionO(&zoznam);
+            break;
+        case 'n':
+            functionN(&zoznam);
+            break;
+        case 's':
+            functionS(&zoznam);
+            break;
+        case 'h':
+            functionH(&zoznam);
+            break;
+        case 'p':
+            functionP(&zoznam);
+            break;
+        case 'z':
+            functionZ(&zoznam);
+            break;
+        case 'k':
+            functionK(&zoznam);
+            break;
+        case 'e':
+            printf("Koniec. \n\n");
+            exit(1);
+        default:
+            printf("Zly vstup. \n\n");
+            break;
+        }
     }
 }
