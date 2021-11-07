@@ -30,7 +30,7 @@ int autoryIsValid(char *buf)
 
 int typIsValid(char *buf)
 {
-    if (strlen(buf) != "PD" || "UD" || "PP" || "UP")
+    if ((buf) != "PD" || "UD" || "PP" || "UP")
         return 0;
 }
 
@@ -93,7 +93,12 @@ void functionV(FILE *zoznam)
                 printf("Mena autorov: %s", buf);
                 break;
             case 6:
-                printf("Typ prezentovania: %s", buf);
+                if (typIsValid(&*buf) != 0)
+                {
+                    printf("Typ prezentovania: %s", buf);
+                    break;
+                }
+                printf("Nekorektne zadany vstup: Typ prezentovania\n");
                 break;
             case 7:
                 printf("Cas prezentovania: %s", buf);
@@ -142,6 +147,8 @@ void main()
     char input;
     char **poleZnakov = NULL;
     char buf[50];
+
+    printf("-----------------------------------------------");
 
     while (1)
     {
