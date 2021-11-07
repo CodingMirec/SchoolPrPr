@@ -1,3 +1,2 @@
-case 'v':
-    //     functionV(&zoznam);
-    //     break;
+
+    int riadky, zaznamy, i;

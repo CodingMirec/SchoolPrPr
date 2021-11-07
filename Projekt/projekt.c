@@ -1,10 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int rodneIsValid(char *str)
+int menoIsValid(char *buf)
 {
-    unsigned long long value = strtoull(str, NULL, 10);
+    if (strlen(buf) >= 50)
+        return 0;
+}
+
+int rodneIsValid(char *buf)
+{
+    unsigned long long value = strtoull(buf, NULL, 10);
     return value >= 1000000000 && value % 11 == 0;
+}
+
+int kodIsValid(char *buf)
+{
+}
+int nazovPrispevkuIsValid(char *buf)
+{
+    if (strlen(buf) >= 150)
+        return 0;
+}
+
+int autoryIsValid(char *buf)
+{
+    if (strlen(buf) >= 200)
+        return 0;
+}
+
+int typIsValid(char *buf)
+{
+    if (strlen(buf) != "PD" || "UD" || "PP" || "UP")
+        return 0;
+}
+
+int casIsValid(char *buf)
+{
+    if (strlen(buf) >= 50)
+        return 0;
+}
+
+int datumIsValid(char *buf)
+{
+    if (strlen(buf) >= 50)
+        return 0;
 }
 
 void functionV(FILE *zoznam)
@@ -29,10 +68,20 @@ void functionV(FILE *zoznam)
             switch (i)
             {
             case 1:
-                printf("Prezenter: %s", buf);
+                if (menoIsValid(&*buf) != 0)
+                {
+                    printf("Prezenter: %s", buf);
+                    break;
+                }
+                printf("Nekorektne zadany vstup: Prezenter\n");
                 break;
             case 2:
-                printf("Rodne cislo: %s", buf);
+                if (rodneIsValid(&*buf) == 1)
+                {
+                    printf("Rodne cislo: %s", buf);
+                    break;
+                }
+                printf("Nekorektne zadany vstup: Rodne cislo\n");
                 break;
             case 3:
                 printf("Kod prezentacnej miestnosti: %s", buf);
@@ -97,9 +146,8 @@ void main()
     while (1)
     {
 
-        printf("Napis znak: \n");
+        printf("\nNapis znak: \n");
         scanf(" %c", &input);
-        printf("Napisane : %c \n", input);
 
         switch (input)
         {
@@ -128,10 +176,10 @@ void main()
             functionK(&zoznam);
             break;
         case 'e':
-            printf("Koniec. \n\n");
+            printf("Koniec programu\n\n");
             exit(1);
         default:
-            printf("Zly vstup. \n\n");
+            printf("Zly vstup\n\n");
             break;
         }
     }
