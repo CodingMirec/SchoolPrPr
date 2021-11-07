@@ -15,7 +15,7 @@ int rodneIsValid(char *buf)
 
 int kodIsValid(char *buf)
 {
-    if ((buf[0] >= 'A' && buf[0] <= 'Z') && ((buf[1] <= '9') && (buf[1] >= '0')) && ((buf[2] <= '9') && (buf[2] >= '0')) == 1)
+    if (strlen(buf) == 4 && (buf[0] >= 'A' && buf[0] <= 'Z') && ((buf[1] <= '9') && (buf[1] >= '0')) && ((buf[2] <= '9') && (buf[2] >= '0')) == 1)
         return 1;
 }
 
@@ -33,14 +33,14 @@ int autoryIsValid(char *buf)
 
 int typIsValid(char *buf)
 {
-    if ((buf - buf[2]) != 'PD' || 'UD' || 'PP' || 'UP')
-        return 0;
+    if ((buf[0] == 'P' || buf[0] == 'U') && (buf[1] == 'P' || buf[1] == 'U') == 1)
+        return 1;
 }
 
 int casIsValid(char *buf)
 {
-    if (strlen(buf) >= 50)
-        return 0;
+    if (strlen(buf) == 4 && ((buf[0] + buf[1]) >= '0' && (buf[0] + buf[1]) <= '24') && (((buf[3] + buf[4]) >= '0') && ((buf[3] + buf[4]) <= '60')) && ((buf[2] <= '9') && (buf[2] >= '0')) == 1)
+        return 1;
 }
 
 int datumIsValid(char *buf)
@@ -101,7 +101,7 @@ void functionV(FILE *zoznam)
                 printf("Mena autorov: %s", buf);
                 break;
             case 6:
-                if (typIsValid(&*buf) != 0)
+                if (typIsValid(&*buf) == 1)
                 {
                     printf("Typ prezentovania: %s", buf);
                     break;
@@ -154,7 +154,6 @@ void main()
     FILE *zoznam = NULL;
     char input;
     char **poleZnakov = NULL;
-    char buf[50];
 
     printf("-----------------------------------------------");
 
