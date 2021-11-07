@@ -15,11 +15,14 @@ int rodneIsValid(char *buf)
 
 int kodIsValid(char *buf)
 {
+    if ((buf[0] >= 'A' && buf[0] <= 'Z') && ((buf[1] <= '9') && (buf[1] >= '0')) && ((buf[2] <= '9') && (buf[2] >= '0')) == 1)
+        return 1;
 }
+
 int nazovPrispevkuIsValid(char *buf)
 {
-    if (strlen(buf) >= 150)
-        return 0;
+    if (strlen(buf) <= 150)
+        return 1;
 }
 
 int autoryIsValid(char *buf)
@@ -30,7 +33,7 @@ int autoryIsValid(char *buf)
 
 int typIsValid(char *buf)
 {
-    if ((buf) != "PD" || "UD" || "PP" || "UP")
+    if ((buf - buf[2]) != 'PD' || 'UD' || 'PP' || 'UP')
         return 0;
 }
 
@@ -84,7 +87,12 @@ void functionV(FILE *zoznam)
                 printf("Nekorektne zadany vstup: Rodne cislo\n");
                 break;
             case 3:
-                printf("Kod prezentacnej miestnosti: %s", buf);
+                if (kodIsValid(&*buf) == 1)
+                {
+                    printf("Kod prezentacnej miestnosti: %s", buf);
+                    break;
+                }
+                printf("Nekorektne zadany vstup: Kod prezentacnej miestnosti\n");
                 break;
             case 4:
                 printf("Nazov prispevku: %s", buf);
